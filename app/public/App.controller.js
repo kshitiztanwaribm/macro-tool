@@ -6,28 +6,20 @@ sap.ui.define([
 	"use strict";
 
 	return Controller.extend("DCET.App", {
-		onPress : function () {
-			MessageToast.show("Hello UI5!");
-			this.byId("app").to(this.byId("intro"));
-		},
-
 		onInit : function () {
-			this.getView().setModel(new JSONModel({
-					features: [
-						"Enterprise-Ready Web Toolkit",
-						"Powerful Development Concepts",
-						"Feature-Rich UI Controls",
-						"Consistent User Experience",
-						"Free and Open Source",
-						"Responsive Across Browsers and Devices"
-					]
-				})
-			);
-		},
-
-		onChange: function (oEvent) {
-			var bState = oEvent.getParameter("state");
-			this.byId("ready").setVisible(bState);
+			let jModel = new JSONModel();
+			let data = {
+				"Logs": [
+					{"col1": "TEXT", "col2": "TEXT", "col3": 1, "col4": 1, "col5": "TEXT", "col6": 1},
+					{"col1": "TEXT", "col2": "TEXT", "col3": 1, "col4": 1, "col5": "TEXT", "col6": 1},
+					{"col1": "TEXT", "col2": "TEXT", "col3": 1, "col4": 1, "col5": "TEXT", "col6": 1},
+					{"col1": "TEXT", "col2": "TEXT", "col3": 1, "col4": 1, "col5": "TEXT", "col6": 1},
+					{"col1": "TEXT", "col2": "TEXT", "col3": 1, "col4": 1, "col5": "TEXT", "col6": 1},
+					{"col1": "TEXT", "col2": "TEXT", "col3": 1, "col4": 1, "col5": "TEXT", "col6": 1}
+				]
+			}
+			jModel.setData(data);
+			this.getView().setModel(jModel);
 		}
 	});
 

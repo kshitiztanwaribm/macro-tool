@@ -2,15 +2,70 @@
 	controllerName="DCET.App"
 	displayBlock="true"
 	xmlns="sap.m"
-	xmlns:mvc="sap.ui.core.mvc">
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:t="sap.ui.table"
+	xmlns:l="sap.ui.layout">
 	<App id="app">
-		<Page title="Data Conversion Error Tool" enableScrolling="false">
+		<Page title="Data Conversion Error Tool" enableScrolling="true">
 			<Panel class="sapUiResponsiveMargin" width="auto">
 				<FlexBox alignItems="Center" justifyContent="SpaceBetween">
 					<Title text="Upload file to get started!" class="sapUiTinyMarginEnd"/>
 					<Button text="Upload File..." press=".onPress" type="Emphasized" class="sapUiSmallMargin"/>
 				</FlexBox>
 			</Panel>
+			<l:BlockLayout>
+				<l:BlockLayoutRow>
+					<l:BlockLayoutCell>
+						<t:Table selectionMode="MultiToggle" ariaLabelledBy="title" visibleRowCount="18" rows="{/Logs}">
+							<t:extension>
+								<FlexBox justifyContent="Center">
+									<OverflowToolbar style="Clear">
+										<Title id="title" text="Error Classification"/>
+									</OverflowToolbar>
+								</FlexBox>
+							</t:extension>
+							<t:columns>
+								<t:Column>
+									<Label text="Col 1"/>
+									<t:template>
+										<Text text="{col1}" wrapping="false"/>
+									</t:template>
+								</t:Column>
+								<t:Column>
+									<Label text="Col 2"/>
+									<t:template>
+										<Text text="{col2}" wrapping="false"/>
+									</t:template>
+								</t:Column>
+								<t:Column>
+									<Label text="Col 3"/>
+									<t:template>
+										<Text text="{col3}" wrapping="false"/>
+									</t:template>
+								</t:Column>
+								<t:Column>
+									<Label text="Col 4"/>
+									<t:template>
+										<Text text="{col4}" wrapping="false"/>
+									</t:template>
+								</t:Column>
+								<t:Column>
+									<Label text="Col 5"/>
+									<t:template>
+										<Text text="{col5}" wrapping="false"/>
+									</t:template>
+								</t:Column>
+								<t:Column>
+									<Label text="Col 6"/>
+									<t:template>
+										<Text text="{col6}" wrapping="false"/>
+									</t:template>
+								</t:Column>
+							</t:columns>
+						</t:Table>
+					</l:BlockLayoutCell>
+				</l:BlockLayoutRow>
+			</l:BlockLayout>
 		</Page>
 	</App>
 </mvc:View>
