@@ -3,6 +3,7 @@ const app = express();
 app.use(express.static(__dirname + '/public'));
 upload = require('express-fileupload');
 app.use(upload());
+const mapping = require('./mapping');
 
 
 app.get('/', function (req, res) {
@@ -19,22 +20,29 @@ app.post('/upload', function (req, res) {
     csvData = csvData.split('\r\n');
 
     //set cols
-    csvData[1].replace(/"/g, '').split(',').forEach(function (elem) {
-      resObj.cols.push({columnName: elem});
+    csvData[1].split('","').forEach(function (elem) {
+      resObj.cols.push({columnName: elem.replace(/"/g, '')});
     });
+    resObj.cols.push({columnName: "Portlet"});
+    resObj.cols.push({columnName: "Classification"});
+    resObj.cols.push({columnName: "Category"});
+    resObj.cols.push({columnName: "Resolution"});
 
     //set rows
     if (csvData.length > 2) {
       csvData = csvData.slice(2, csvData.length);
       csvData.forEach(function (elem) {
-        let row = elem.replace(/"/g, '').split(',')
+        let row = elem.split('","')
         let obj = {}
-        for (let i = 0; i < resObj.cols.length; i++) {
-          obj[resObj.cols[i].columnName] = row[i];
+        for (let i = 0; i < resObj.cols.length - 4; i++) {
+          obj[resObj.cols[i].columnName] = row[i].replace(/"/g, '');
         }
         resObj.rows.push(obj);
       });
     }
+
+    //perform mapping
+    mapping.perform(resObj);
 
     res.status(200);
   } catch (e) {
