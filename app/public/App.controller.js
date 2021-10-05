@@ -29,7 +29,7 @@ sap.ui.define([
 				let columnName = context.getObject().columnName;
 				return new sap.ui.table.Column({
 					label: columnName,
-					template: columnName,
+					template: columnName
 				});
 			});
 			errTable.bindRows('/rows');

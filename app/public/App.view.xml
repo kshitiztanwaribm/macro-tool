@@ -29,6 +29,7 @@
 								 selectionMode="MultiToggle"
 								 ariaLabelledBy="title"
 								 visibleRowCount="18"
+								 alternateRowColors="true"
 								 rows="{/Logs}">
 							<t:extension>
 								<FlexBox justifyContent="Center">
