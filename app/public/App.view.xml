@@ -3,7 +3,6 @@
 	displayBlock="true"
 	xmlns="sap.m"
 	xmlns:mvc="sap.ui.core.mvc"
-	xmlns:t="sap.ui.table"
 	xmlns:l="sap.ui.layout"
 	xmlns:u="sap.ui.unified">
 	<App id="app">
@@ -16,6 +15,7 @@
 							uploadUrl="upload"
 							uploadComplete="handleUploadComplete"
 							fileType="csv"
+							width="400px"
 							name="uploader"/>
 					<Button
 							text="Upload File"
@@ -25,20 +25,26 @@
 			<l:BlockLayout>
 				<l:BlockLayoutRow>
 					<l:BlockLayoutCell>
-						<t:Table id="errTable"
-								 selectionMode="MultiToggle"
-								 ariaLabelledBy="title"
-								 visibleRowCount="18"
-								 alternateRowColors="true"
-								 rows="{/Logs}">
-							<t:extension>
-								<FlexBox justifyContent="Center">
-									<OverflowToolbar style="Clear">
-										<Title id="title" text="Error Classification"/>
-									</OverflowToolbar>
-								</FlexBox>
-							</t:extension>
-						</t:Table>
+						<Table id="errTable"
+							   fixedLayout="false"
+							   noDataText="No data to show. Upload file to view error classifications."
+							   alternateRowColors="true">
+							<headerToolbar>
+								<OverflowToolbar>
+									<Title text="Error Classification"
+										   level="H2"/>
+									<ToolbarSpacer/>
+									<CheckBox text="Fixed Layout"
+											  selected="false"
+											  select="onCheckBoxSelect"/>
+								</OverflowToolbar>
+							</headerToolbar>
+							<columns>
+								<Column>
+									<Label text=""/>
+								</Column>
+							</columns>
+						</Table>
 					</l:BlockLayoutCell>
 				</l:BlockLayoutRow>
 			</l:BlockLayout>
