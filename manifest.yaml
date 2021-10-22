@@ -1,6 +1,33 @@
----
 applications:
-- name: app
-  random-route: true
-  path: app
-  memory: 128M
+  # Application
+  - name: app
+    instances: 1
+    memory: 128M
+    routes:
+      - route: app-chipper-bongo-sb.cfapps.us10.hana.ondemand.com
+    path: app
+    buildpacks:
+      - nodejs_buildpack
+    timeout: 180
+    services:
+      - xsuaa-service
+
+  # Application Router
+  - name: approuter
+    routes:
+      - route: approuter-app-chipper-bongo-sb.cfapps.us10.hana.ondemand.com
+    path: approuter
+    buildpacks:
+      - nodejs_buildpack
+    memory: 128M
+    services:
+      - xsuaa-service
+    env:
+      destinations: >
+        [
+          {
+            "name": "upload-destination",
+            "url": "https://app-chipper-bongo-sb.cfapps.us10.hana.ondemand.com",
+            "forwardAuthToken": true
+          }
+        ]

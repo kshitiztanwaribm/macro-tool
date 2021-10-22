@@ -1,0 +1,29 @@
+{
+  "xsappname": "app",
+  "tenant-mode": "dedicated",
+  "scopes": [
+    {
+      "name": "$XSAPPNAME.read",
+      "description": "With this scope, USER can view app."
+    }
+  ],
+
+  "role-templates": [
+    {
+      "name": "Viewer",
+      "description": "Role to view app.",
+      "scope-references": [
+        "$XSAPPNAME.read"
+      ]
+    }
+  ],
+  "role-collections": [
+    {
+      "name": "AppViewer",
+      "description": "App Viewer",
+      "role-template-references": [
+        "$XSAPPNAME.Viewer"
+      ]
+    }
+  ]
+}

@@ -15,18 +15,25 @@ sap.ui.define([
 		onInit : function () {
 		},
 
-		handleUploadComplete: function(oEvent) {
+		handleUploadComplete: function(event) {
+			// parse response
+			let res = event.getParameter('response')
+			let htmlDoc = new DOMParser().parseFromString(res, 'text/html');
+			let body = htmlDoc.getElementsByTagName('pre')[0].innerText;
+			try {
+				body = JSON.parse(body);
+				this.getView().setModel(new JSONModel(body));
+			} catch (e) {
+				MessageToast.show('Unable to fulfill request. Ensure user has correct permissions.');
+				this.byId('errTable').setBusy(false);
+				return;
+			}
+
 			// reset table
 			let errTable = this.byId('errTable');
 			errTable.removeAllItems();
 			errTable.removeAllColumns();
 
-			// parse response
-			let res = oEvent.getParameter('response');
-			let htmlDoc = new DOMParser().parseFromString(res, 'text/html');
-			let body = htmlDoc.getElementsByTagName('pre')[0].innerText;
-			body = JSON.parse(body);
-			this.getView().setModel(new JSONModel(body));
 
 			// add columns to table
 			body.cols.forEach(function (col) {

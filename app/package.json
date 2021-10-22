@@ -11,6 +11,9 @@
   "dependencies": {
     "express": "^4.17.1",
     "express-fileupload": "^1.2.1",
-    "string-similarity": "^4.0.4"
+    "string-similarity": "^4.0.4",
+    "@sap/xsenv": "^3.1.0",
+    "@sap/xssec": "^3.0.10",
+    "passport": "^0.4.1"
   }
 }

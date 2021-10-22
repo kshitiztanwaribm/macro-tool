@@ -1,0 +1,12 @@
+{
+  "welcomeFile": "index.html",
+  "routes": [{
+    "source": "^/upload",
+    "destination": "upload-destination",
+    "csrfProtection": false,
+    "httpMethods": ["POST"]
+  }, {
+    "source": "^/",
+    "localDir": "public"
+  }]
+}

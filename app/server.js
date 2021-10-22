@@ -1,16 +1,19 @@
 const express = require('express');
 const app = express();
-app.use(express.static(__dirname + '/public'));
+
 upload = require('express-fileupload');
 app.use(upload());
+
 const mapping = require('./mapping');
 
+const passport = require('passport');
+const { JWTStrategy } = require('@sap/xssec');
+const xsenv = require('@sap/xsenv');
+passport.use(new JWTStrategy(xsenv.getServices({uaa:{tag:'xsuaa'}}).uaa));
+app.use(passport.initialize());
+app.use(passport.authenticate('JWT', { session: false }));
 
-app.get('/', function (req, res) {
-  res.sendFile(__dirname + '/public/index.html');
-});
-
-app.post('/upload', function (req, res) {
+app.post('/upload', checkScope, function (req, res) {
   let resObj = {
     cols: [],
     rows: []
@@ -50,6 +53,14 @@ app.post('/upload', function (req, res) {
   }
   return res.send(resObj);
 });
+
+function checkScope(req, res, next) {
+  if (req.authInfo.checkLocalScope('read')) {
+    return next();
+  } else {
+    res.status(403).end('Forbidden');
+  }
+}
 
 const port = process.env.PORT || 3000;
 app.listen(port, function () {
