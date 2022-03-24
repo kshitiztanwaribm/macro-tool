@@ -23,22 +23,22 @@ app.post('/upload', checkScope, function (req, res) {
     csvData = csvData.split('\r\n');
 
     //set cols
-    csvData[1].split('","').forEach(function (elem) {
-      resObj.cols.push({columnName: elem.replace(/"/g, '')});
+    csvData[1].split(',').forEach(function (elem) {
+      resObj.cols.push({columnName: elem});
     });
-    resObj.cols.push({columnName: "Portlet"});
-    resObj.cols.push({columnName: "Classification"});
-    resObj.cols.push({columnName: "Category"});
-    resObj.cols.push({columnName: "Resolution"});
+    resObj.cols.push({columnName: 'Portlet'});
+    resObj.cols.push({columnName: 'Classification'});
+    resObj.cols.push({columnName: 'Category'});
+    resObj.cols.push({columnName: 'Resolution'});
 
     //set rows
     if (csvData.length > 2) {
       csvData = csvData.slice(2, csvData.length);
       csvData.forEach(function (elem) {
-        let row = elem.split('","')
+        let row = elem.split(',')
         let obj = {}
         for (let i = 0; i < resObj.cols.length - 4; i++) {
-          obj[resObj.cols[i].columnName] = row[i].replace(/"/g, '');
+          obj[resObj.cols[i].columnName] = row[i];
         }
         resObj.rows.push(obj);
       });
