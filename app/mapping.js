@@ -29,13 +29,13 @@ function getErrorMappings() {
     let data = fs.readFileSync('./mappings.csv', 'utf8');
     data = data.split('\r\n').slice(1, data.length);
     data.forEach(function (elem) {
-        let mapping = elem.split('","');
+        let mapping = elem.split(',');
         mappings.push({
-            error: mapping[0].replace(/"/g, ''),
-            portlet: mapping[1].replace(/"/g, ''),
-            classification: mapping[2].replace(/"/g, ''),
-            category: mapping[3].replace(/"/g, ''),
-            resolution: mapping[4].replace(/"/g, '')
+            error: mapping[0],
+            portlet: mapping[1],
+            classification: mapping[2],
+            category: mapping[3],
+            resolution: mapping[4]
         })
     });
     return mappings;
