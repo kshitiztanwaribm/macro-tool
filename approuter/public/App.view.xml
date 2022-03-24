@@ -6,7 +6,7 @@
 	xmlns:l="sap.ui.layout"
 	xmlns:u="sap.ui.unified">
 	<App id="app">
-		<Page title="Data Conversion Error Tool" enableScrolling="true">
+		<Page title="Data Error Classification Tool" enableScrolling="true">
 			<Panel class="sapUiResponsiveMargin" width="auto">
 				<FlexBox alignItems="Center" justifyContent="SpaceBetween">
 					<Title text="Upload file to get started!" class="sapUiTinyMarginEnd"/>
