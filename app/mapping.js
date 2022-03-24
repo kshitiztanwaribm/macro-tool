@@ -6,14 +6,15 @@ module.exports = {
         let mappings = getErrorMappings();
         errors.rows.forEach(function (error) {
             let actualError = error['Errors'];
-            let bestScore = 0;
-            let mappedRes = {};
+            // let bestScore = 0;
+            let mappedRes = {portlet: null, classification: null, category: null, resolution: null};
             mappings.forEach(function (mapping) {
-                let simScore = ss.compareTwoStrings(actualError.toLowerCase(), mapping['error'].toLowerCase());
-                if (simScore > bestScore) {
-                    bestScore = simScore;
-                    mappedRes = mapping;
-                }
+                if (actualError.toLowerCase() === mapping['error'].toLowerCase()) mappedRes = mapping;
+                // let simScore = ss.compareTwoStrings(actualError.toLowerCase(), mapping['error'].toLowerCase());
+                // if (simScore > bestScore) {
+                //     bestScore = simScore;
+                //     mappedRes = mapping;
+                // }
             });
             error['Portlet'] = mappedRes.portlet;
             error['Classification'] = mappedRes.classification;
